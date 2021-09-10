@@ -12,7 +12,8 @@
   "dependencies": {
     "apollo-datasource-rest": "^3.2.0",
     "apollo-server-lambda": "^3.2.0",
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "graphql-cost-analysis": "^1.0.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.2.0",
