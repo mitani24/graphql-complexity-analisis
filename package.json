@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "serverless offline",
     "deploy": "serverless deploy",
-    "undeploy": "serverless remove"
+    "undeploy": "serverless remove",
+    "codegen": "graphql-codegen"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.2.0",
