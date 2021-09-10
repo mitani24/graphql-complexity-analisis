@@ -15,7 +15,7 @@ export type Scalars = {
 
 export type Author = {
   __typename?: 'Author';
-  books: BookConnection;
+  books?: Maybe<BookConnection>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
 };
@@ -42,7 +42,7 @@ export type AuthorEdge = {
 
 export type Book = {
   __typename?: 'Book';
-  authors: AuthorConnection;
+  authors?: Maybe<AuthorConnection>;
   id: Scalars['ID'];
   title?: Maybe<Scalars['String']>;
 };
@@ -197,7 +197,7 @@ export type ResolversParentTypes = {
 };
 
 export type AuthorResolvers<ContextType = any, ParentType extends ResolversParentTypes['Author'] = ResolversParentTypes['Author']> = {
-  books?: Resolver<ResolversTypes['BookConnection'], ParentType, ContextType, RequireFields<AuthorBooksArgs, never>>;
+  books?: Resolver<Maybe<ResolversTypes['BookConnection']>, ParentType, ContextType, RequireFields<AuthorBooksArgs, never>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -216,7 +216,7 @@ export type AuthorEdgeResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
-  authors?: Resolver<ResolversTypes['AuthorConnection'], ParentType, ContextType, RequireFields<BookAuthorsArgs, never>>;
+  authors?: Resolver<Maybe<ResolversTypes['AuthorConnection']>, ParentType, ContextType, RequireFields<BookAuthorsArgs, never>>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   title?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

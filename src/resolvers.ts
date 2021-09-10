@@ -1,15 +1,29 @@
-const resolvers = {
+import BookAPI from "./datasources/book-api";
+import { Resolvers } from "./__generated__/graphql-resolver-types";
+
+type ContextType = {
+  dataSources: {
+    bookAPI: BookAPI;
+  };
+};
+
+const resolvers: Resolvers<ContextType> = {
   Query: {
-    tracks(_, __, { dataSources }) {
-      return dataSources.trackAPI.getTracks();
+    authors(_, __, { dataSources }) {
+      return dataSources.bookAPI.getAuthors();
     },
-    track(_, { id }, { dataSources }) {
-      return dataSources.trackAPI.getTrack(id);
+    books(_, __, { dataSources }) {
+      return dataSources.bookAPI.getBooks();
     },
   },
-  Track: {
-    author({ authorId }, _, { dataSources }) {
-      return dataSources.trackAPI.getAuthor(authorId);
+  Author: {
+    books({ id }, _, { dataSources }) {
+      return dataSources.bookAPI.getAuthorBooks(id);
+    },
+  },
+  Book: {
+    authors({ id }, _, { dataSources }) {
+      return dataSources.bookAPI.getBookAuthors(id);
     },
   },
 };

@@ -11,7 +11,7 @@ type Query {
 type Author {
   id: ID!
   name: String
-  books(first: Int, last: Int, before: String, after: String): BookConnection!
+  books(first: Int, last: Int, before: String, after: String): BookConnection
 }
 
 type AuthorConnection {
@@ -32,7 +32,7 @@ type Book {
     last: Int
     before: String
     after: String
-  ): AuthorConnection!
+  ): AuthorConnection
 }
 
 type BookConnection {
