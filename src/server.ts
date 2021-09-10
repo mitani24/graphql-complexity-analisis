@@ -3,8 +3,8 @@ import path from "path";
 import { ApolloServer, gql } from "apollo-server-lambda";
 import resolvers from "./resolvers";
 import BookAPI from "./datasources/book-api";
-import constAnalysis from "graphql-cost-analysis";
-import { createComplexityRule } from "graphql-query-complexity";
+import { queryComplexityPlugin } from "./complexity/query-complexity-plugin";
+import { listBasedEstimator } from "./complexity/list-based-estimator";
 
 const typeDefs = fs
   .readFileSync(path.join(__dirname, "../schema.graphql"))
@@ -18,28 +18,10 @@ const server = new ApolloServer({
   dataSources() {
     return { bookAPI: new BookAPI() };
   },
-  validationRules: [
-    constAnalysis({
-      defaultCost: 1,
-      maximumCost: 100,
-      onComplete(cost: number) {
-        console.log(`graphql-cost-analysis: ${cost}`);
-      },
-    }),
-    createComplexityRule({
+  plugins: [
+    queryComplexityPlugin({
       maximumComplexity: 100,
-      estimators: [
-        ({ field, args, childComplexity }) => {
-          if (field.type.toString().includes("Connection")) {
-            const length = args.first ?? 0 + args.last ?? 0;
-            if (childComplexity === 0) {
-              return length;
-            }
-            return length * childComplexity;
-          }
-          return childComplexity;
-        },
-      ],
+      estimators: [listBasedEstimator],
       onComplete(complexity) {
         console.log(`graphql-query-complexity: ${complexity}`);
       },
