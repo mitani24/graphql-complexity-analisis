@@ -1,5 +1,5 @@
 {
-  "name": "serverless-ts-apollo-server",
+  "name": "graphql-complexity-analysis",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
